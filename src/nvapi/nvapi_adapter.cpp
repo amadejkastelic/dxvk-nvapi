@@ -72,11 +72,13 @@ namespace dxvk {
             deviceProperties2.pNext = &m_vkComputeShaderDerivativesProperties;
         }
 
+#if defined(VK_ENABLE_BETA_EXTENSIONS)
         if (IsVkDeviceExtensionSupported(VK_NV_CUDA_KERNEL_LAUNCH_EXTENSION_NAME)) {
             m_vkCudaKernelLaunchProperties.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUDA_KERNEL_LAUNCH_PROPERTIES_NV;
             m_vkCudaKernelLaunchProperties.pNext = deviceProperties2.pNext;
             deviceProperties2.pNext = &m_vkCudaKernelLaunchProperties;
         }
+#endif
 
         m_vkIdProperties.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES;
         m_vkIdProperties.pNext = deviceProperties2.pNext;
